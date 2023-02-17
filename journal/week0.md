@@ -2,23 +2,23 @@
 
 ## Task 1
 
-Performed: Sucessfully created the AWS Credential and installed AWS CLI on gitpod.
+Performed Sucessfully: Created an IAM user enabled MFA on Root account and IAM user.Set permissions for an IAM user.Created the AWS Credential and installed AWS CLI on gitpod.
 (gitpod.yaml)
 
 ## Task 2
 
-Here is the image of the Cruddur conceptual diagram created through draw.io.Reason didnot had more shapes to draw in lucid chart.
+Here is the image of the Cruddur conceptual diagram created through draw.io.Reason in free trial of lucid chart ran out of shapes.
 
 ![Conceptual Diagram](week0_images/ConceptualDiagram.jpg)
 
 
 ## Task 3
-Screenshot of Budgets,Set two Budgets one for the Cost and other one for the Credit spend.
+Screenshot of Budgets,Set two Budgets on AWS Console,one for the Cost and another for the Credit spend.
 
 ![Budget](week0_images/2BudgetSet.jpg)
 
 ## Task 4
-Screenshot of Billing alarm.
+Screenshot of Billing alarm.Set Billing Alert on AWS Console
 
 ![Billing alert](week0_images/BillingAlarm.jpg)
 
