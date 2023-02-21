@@ -11,12 +11,18 @@ import MessageGroupPage from './pages/MessageGroupPage';
 import ConfirmationPage from './pages/ConfirmationPage';
 import React from 'react';
 
+
 import {
   createBrowserRouter,
   RouterProvider
 } from "react-router-dom";
 
 const router = createBrowserRouter([
+
+  {
+    path: "/",
+    element: <HomeFeedPage />
+  },
   {
     path: "/notifications",
     element: <NotificationsFeedPage />
