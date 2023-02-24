@@ -420,8 +420,7 @@ Step 4: Run on the CLI terminal.
 
 
  
- 
- FROM python:3.10-slim-buster
+FROM python:3.10-slim-buster
 WORKDIR /backend-flask
 COPY requirements.txt requirements.txt
 RUN pip3 install -r requirements.txt
