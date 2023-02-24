@@ -5,19 +5,19 @@
 
 Copy and paste this code in the docker file
 
-### Code: 
-
-
+Code: 
+---------------------------------------------------------------------------------------------
 FROM python:3.10-slim-buster
-WORKDIR /backend-flask
-COPY requirements.txt requirements.txt
-RUN pip3 install -r requirements.txt
-COPY . .
-ENV FLASK_ENV=development
-EXPOSE ${PORT}
-CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0", "--port=4567"]
+  WORKDIR /backend-flask
+  COPY requirements.txt requirements.txt
+  RUN pip3 install -r requirements.txt
+  COPY . .
+  ENV FLASK_ENV=development
+  EXPOSE ${PORT}
+  CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0", "--port=4567"]
 ------------------------------------------------------------------------------------------------
 ### On the CLI terminal Run:
+
 ⦁	pip3 install -r requirements.txt
 It will install the python libraries use for the app.
 CMD:
@@ -32,9 +32,9 @@ Screenshot of the Backend page:
 ![Backendimage](week1_images/Backend.jpg)
 
 
-## Build Container
+Build Container
 ⦁	docker build -t  backend-flask ./backend-flask
-## Container Image:
+Container Image:
 ⦁	Docker image  (display the conatiner image)
 
 Now Set environment variable with these commands:
@@ -47,9 +47,10 @@ Now list the container from this docker command:
 Now change directory to: cd frontend-react-js/
 then run npm Install before building the container,it needs to copy the contents of node_modules
 ⦁	npm i
------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
 ## Task 2: Create a Docker file on Frontend-react-js
-## Code: copy and paste this code in the docker file
+
+ Code: copy and paste this code in the docker file
 FROM node:16.18
 ENV PORT=3000
 COPY . /frontend-react-js
@@ -57,13 +58,14 @@ WORKDIR /frontend-react-js
 RUN npm install
 EXPOSE ${PORT}
 CMD ["npm", "start"]
-### Build Container
+ Build Container
 ⦁	docker build -t frontend-react-js ./frontend-react-js
-### Run Container
+ Run Container
 ⦁	docker run -p 3000:3000 -d frontend-react-js
 ----------------------------------------------------------------------------------------------------
 Now create a file on root project: "docker-compose.yml" then copy this code:
-### Code:
+
+Code:
 version: "3.8"
 services:
   backend-flask:
@@ -87,7 +89,7 @@ networks:
   internal-network:
     driver: bridge
     name: cruddur
----------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------
 then right click on compose.yaml & click on compose up OR run command:
 ⦁	 docker compose up
 docker-compose up’ is a Docker command to start and run an entire app on a standalone host that contains multiple services.
@@ -100,10 +102,12 @@ At the end Commit and synchronize all the changes have done in the repository OR
 Run: git push.
 
 ## Task 3: Notification endpoint for the openAPI
-### Step 1: first install  npm run " npm i "on frontend-react-js directory
+
+ Step 1: first install  npm run " npm i "on frontend-react-js directory
 then compose up the compose.yaml file to start up the environment.Click on the port 3000 so the both ends are communicating.
-### Step 2: we need to authenticate ourself on the site hit join now and enter some information to enter the app as the authenticated user.
-### Step 3: Open the openAPI library click on the elipsis & select add new api path then add the following code:
+Step 2: we need to authenticate ourself on the site hit join now and enter some information to enter the app as the authenticated user.
+Step 3: Open the openAPI library click on the elipsis & select add new api path then add the following code:
+
 ### Code: backend-flask/openapi.yaml 
       /api/activities/notification:
     get:
@@ -124,8 +128,8 @@ then compose up the compose.yaml file to start up the environment.Click on the p
 -------------------------------------------------------------------------------------------------
 
 ### Step 4: To add an endpoint backend-flask/app.py
-### Import:
 
+Import:
 from services.notifications_activities import *
 ---------------------------------------------------------------------------------------
 Code: add this in app.py file
@@ -240,6 +244,7 @@ Step 2: Now create two file under "pages" file name them :
 2.	NotificationsFeedPage.css
  Now write the following code in  NotificationsFeedPage.js file
 Code:
+
 import './NotificationFeedPage.css';
 import React from "react";
 
@@ -355,11 +360,10 @@ Step 1: On the root directory open compose.yaml copy and paste this code:
       - '5432:5432'
     volumes: 
       - db:/var/lib/postgresql/data
-
 volumes:
   db:
     driver: local
-------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
 Step 2: Now compose up the "compose.yaml" then open the required ports: 5432 , 4567 , 8000
 
 ### Create a table:
