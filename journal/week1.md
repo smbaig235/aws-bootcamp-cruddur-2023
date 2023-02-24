@@ -6,7 +6,7 @@
 Copy and paste this code in the docker file
 
 Code: 
----------------------------------------------------------------------------------------------
+
 FROM python:3.10-slim-buster
   WORKDIR /backend-flask
   COPY requirements.txt requirements.txt
@@ -15,7 +15,7 @@ FROM python:3.10-slim-buster
   ENV FLASK_ENV=development
   EXPOSE ${PORT}
   CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0", "--port=4567"]
-------------------------------------------------------------------------------------------------
+
 ### On the CLI terminal Run:
 
 ⦁	pip3 install -r requirements.txt
@@ -47,7 +47,7 @@ Now list the container from this docker command:
 Now change directory to: cd frontend-react-js/
 then run npm Install before building the container,it needs to copy the contents of node_modules
 ⦁	npm i
-----------------------------------------------------------------------------------------------------
+
 ## Task 2: Create a Docker file on Frontend-react-js
 
  Code: copy and paste this code in the docker file
@@ -62,7 +62,7 @@ CMD ["npm", "start"]
 ⦁	docker build -t frontend-react-js ./frontend-react-js
  Run Container
 ⦁	docker run -p 3000:3000 -d frontend-react-js
-----------------------------------------------------------------------------------------------------
+
 Now create a file on root project: "docker-compose.yml" then copy this code:
 
 Code:
@@ -89,7 +89,7 @@ networks:
   internal-network:
     driver: bridge
     name: cruddur
---------------------------------------------------------------------------------------------------
+
 then right click on compose.yaml & click on compose up OR run command:
 ⦁	 docker compose up
 docker-compose up’ is a Docker command to start and run an entire app on a standalone host that contains multiple services.
@@ -125,19 +125,19 @@ Step 3: Open the openAPI library click on the elipsis & select add new api path 
                 items:
                   $ref: '#/components/schemas/Activity'
 
--------------------------------------------------------------------------------------------------
+
 
 ### Step 4: To add an endpoint backend-flask/app.py
 
 Import:
 from services.notifications_activities import *
----------------------------------------------------------------------------------------
+
 Code: add this in app.py file
 @app.route("/api/activities/notifications", methods=['GET'])
 def data_notification():
   data = NotificationActivities.run()
   return data, 200
----------------------------------------------------------------------------------------
+
 Step 4: 
 Now create a file in backend-flask: "notifications_activities.py" add the following code:
 Code:
@@ -168,7 +168,7 @@ class NotificationActivities:
     
     ]
     return results
---------------------------------------------------------------------------------------------------
+
 
 ## Task 4: Flask backend endpoint for notification  & React page for Notifications.
 Step 1: goto the frontend-react-js directory/app.js
@@ -238,7 +238,8 @@ function App() {
 }
 
 export default App;
------------------------------------------------------------------------------------------
+
+
 Step 2: Now create two file under "pages" file name them : 
 1.	NotificationsFeedPage.js 
 2.	NotificationsFeedPage.css
@@ -329,7 +330,7 @@ export default function HomeFeedPage() {
     </article>
   );
 }
------------------------------------------------------------------------------------------------
+
 Step 3: Now commit all the changes of implementation on frontend-reacr-js for notification page.Here is the screenshot of the page.
  
 ![Notifiactionimage](week1_images/Notificationpage.jpg)
@@ -363,7 +364,7 @@ Step 1: On the root directory open compose.yaml copy and paste this code:
 volumes:
   db:
     driver: local
-----------------------------------------------------------------------------------------------------
+
 Step 2: Now compose up the "compose.yaml" then open the required ports: 5432 , 4567 , 8000
 
 ### Create a table:
@@ -389,19 +390,17 @@ aws dynamodb put-item \
 
 ![Itemimage](week1_images/Createitem.jpg)
 
---------------------------------------------------------------------------------------------------
 ### List table:
 aws dynamodb list-tables --endpoint-url http://localhost:8000
 
 ![Listimage](week1_images/Listtable.jpg)
 
-----------------------------------------------------------------------------------------------------
 ### Get records:
 aws dynamodb scan --table-name Music --query "Items" --endpoint-url http://localhost:8000
 
 ![Recordimage](week1_images/Getrecords.jpg)
 
-------------------------------------------------------------------------------------------------------------
+
 Step 3: goto gitpod.yaml paste this code:
 Code:
   - name: postgres
@@ -410,7 +409,8 @@ Code:
       echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" |sudo tee  /etc/apt/sources.list.d/pgdg.list
       sudo apt update
       sudo apt install -y postgresql-client-13 libpq-dev
----------------------------------------------------------------------------------------------
+
+
 Step 4: Run on the CLI terminal.
 ⦁	curl -fsSL https://www.postgresql.org/media/keys/ACCC4CF8.asc|sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/postgresql.gpg
 ⦁	echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" |sudo tee  /etc/apt/sources.list.d/pgdg.list
