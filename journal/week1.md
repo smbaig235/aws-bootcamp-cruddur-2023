@@ -7,6 +7,7 @@ Copy and paste this code in the docker file
 
 Code: 
 
+```
 FROM python:3.10-slim-buster
   WORKDIR /backend-flask
   COPY requirements.txt requirements.txt
@@ -15,6 +16,8 @@ FROM python:3.10-slim-buster
   ENV FLASK_ENV=development
   EXPOSE ${PORT}
   CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0", "--port=4567"]
+  
+  ```
 
 ### On the CLI terminal Run:
 
