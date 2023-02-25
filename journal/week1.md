@@ -17,13 +17,13 @@ Copy and paste this code in the docker file
   
   ```
 
-### Run this command on CLI terminal:
+### Run this command on CLI:
 
 This command will install the python libraries.
 
 `pip3 install -r requirements.txt`
 
-### Run Docker CMD on CLI terminal:
+### Run Docker CMD on CLI:
 
 `python3 -m flask run --host=0.0.0.0 --port=4567`
 
@@ -34,7 +34,7 @@ https://4567-smbaig235-awsbootcampcr-vq3wfbapb9w.ws-us87.gitpod.io/api/activitie
 
 Screenshot of the Backend page:
 
-![Backendimage](weekly_images/Backend.jpg)
+![Backendimage](week1_images/Backend.jpg)
 
 
 ### Build Container
@@ -62,7 +62,7 @@ then run npm Install before building the container,it needs to copy the contents
 
 ## Task 2: Create a Docker file on Frontend-react-js
 
-copy and paste this code in the docker file
+Copy and paste this code in the docker file
  
  ```
 FROM node:16.18
@@ -114,7 +114,7 @@ networks:
 
 Now make sure frontend port 3000 is unlock now click on the link
 
-![Frontendimage](weekly_images/Frontend.jpg)
+![Frontendimage](week1_images/Frontend.jpg)
 
 At the end Commit and synchronize all the changes done in the repository OR 
 Run: git push.
@@ -123,13 +123,13 @@ Run: git push.
 
 ### Step 1:
 
-first install  npm run " npm i "on frontend-react-js directory.
+First install  npm run " npm i "on frontend-react-js directory.
 Then compose up the compose.yaml file to start up the environment.
 Click on the port 3000 so the both ends are communicating.
 
 ### Step 2: 
 
-we need to authenticate ourself on the site hit join now and enter some information to enter the app as the authenticated user.
+We need to authenticate ourself on the site hit join now and enter some information to enter the app as the authenticated user.
 
 ### Step 3: 
 
@@ -170,7 +170,7 @@ def data_notification():
   return data, 200
 ```
 
-### Step 4: 
+### Step 5: 
 Create a file in backend-flask: "notifications_activities.py" add the following code:
 
 ```
@@ -375,7 +375,7 @@ export default function HomeFeedPage() {
 ### Step 3: 
 Commit all the changes of implementation on frontend-react-js for notifications page.Here is the screenshot of the page.
  
-![Notifiactionimage](weekly_images/Notificationpage.jpg)
+![Notifiactionimage](week1_images/Notificationpage.jpg)
 
 ## Task 5: Adding DynamoDB local & Postgres
 
@@ -426,7 +426,7 @@ aws dynamodb create-table \
     --table-class STANDARD
 
 ```
-![tableimage](weekly_images/Createtable.jpg)
+![tableimage](week1_images/Createtable.jpg)
 
 ### Creating an item in DynamoDB:
 
@@ -440,19 +440,19 @@ aws dynamodb put-item \
     
 ```
 
-![Itemimage](weekly_images/Createitem.jpg)
+![Itemimage](week1_images/Createitem.jpg)
 
 ### Listing a table in DynamoDB:
 
 `aws dynamodb list-tables --endpoint-url http://localhost:8000`
 
-![Listimage](weekly_images/Listtable.jpg)
+![Listimage](week1_images/Listtable.jpg)
 
 ### Getting records from DynamDB:
 
 `aws dynamodb scan --table-name Music --query "Items" --endpoint-url http://localhost:8000`
 
-![Recordimage](weekly_images/Getrecords.jpg)
+![Recordimage](week1_images/Getrecords.jpg)
 
 
 ### Step 3: 
