@@ -17,12 +17,15 @@ Copy and paste this code in the docker file
   
   ```
 
-### On the CLI terminal Run:
+### Run this command on CLI terminal:
 
-⦁	pip3 install -r requirements.txt
-It will install the python libraries use for the app.
-### Run Docker CMD:
-⦁	python3 -m flask run --host=0.0.0.0 --port=4567
+This command will install the python libraries.
+
+`pip3 install -r requirements.txt`
+
+### Run Docker CMD on CLI terminal:
+
+`python3 -m flask run --host=0.0.0.0 --port=4567`
 
 Now make sure the backend port(4567) is unlock then click on the link and add these suffix at the end of the URL: /api/activities/home
 now new backend URL will be like this:
@@ -35,10 +38,12 @@ Screenshot of the Backend page:
 
 
 ### Build Container
-⦁	docker build -t  backend-flask ./backend-flask
 
-### Display Container Image:
-⦁	Docker image  
+`docker build -t  backend-flask ./backend-flask`
+
+### Display Container Image
+
+`docker image`  
 
 Now Set environment variable with these commands:
 ```
@@ -46,13 +51,14 @@ Now Set environment variable with these commands:
  set BACKEND_URL="*"
 ```
 ### Overridding Ports:
-⦁	 docker run --rm -p 4567:4567 -it -e FRONTEND_URL='*' -e BACKEND_URL='*' backend-flask
 
-Now list the container from this docker command:
+`docker run --rm -p 4567:4567 -it -e FRONTEND_URL='*' -e BACKEND_URL='*' backend-flask`
+
+list the container from this docker command:
 `docker ps`
 Now change directory to: cd frontend-react-js/
 then run npm Install before building the container,it needs to copy the contents of node_modules
-	`npm i`
+`npm i`
 
 ## Task 2: Create a Docker file on Frontend-react-js
 
@@ -68,11 +74,14 @@ EXPOSE ${PORT}
 CMD ["npm", "start"]
 ```
 ### Build Container
+
 `docker build -t frontend-react-js ./frontend-react-js`
+
 ### Run Container
+
 `docker run -p 3000:3000 -d frontend-react-js`
 
-Now create a file on root project: "docker-compose.yml" then copy this code:
+Create a file on root project: "docker-compose.yml" file then copy the following code:
 
 ```
 version: "3.8"
@@ -99,9 +108,9 @@ networks:
     driver: bridge
     name: cruddur
 ```
-then right click on compose.yaml & click on compose up OR run command:
+ Right click on compose.yaml & click on "compose up" option OR run command:
   `docker compose up`
-docker-compose up’ is a Docker command to start and run an entire app on a standalone host that contains multiple services.
+ `docker-compose up` is a Docker command to start and run an entire app on a standalone host that contains multiple services.
 
 Now make sure frontend port 3000 is unlock now click on the link
 
@@ -110,17 +119,26 @@ Now make sure frontend port 3000 is unlock now click on the link
 At the end Commit and synchronize all the changes done in the repository OR 
 Run: git push.
 
-## Task 3: Notification endpoint for the openAPI
+## Task 3: Notification endpoint for the open API
 
- Step 1: first install  npm run " npm i "on frontend-react-js directory
-then compose up the compose.yaml file to start up the environment.Click on the port 3000 so the both ends are communicating.
-Step 2: we need to authenticate ourself on the site hit join now and enter some information to enter the app as the authenticated user.
-Step 3: Open the openAPI library click on the elipsis & select add new api path then add the following code:
+### Step 1:
+
+first install  npm run " npm i "on frontend-react-js directory.
+Then compose up the compose.yaml file to start up the environment.
+Click on the port 3000 so the both ends are communicating.
+
+### Step 2: 
+
+we need to authenticate ourself on the site hit join now and enter some information to enter the app as the authenticated user.
+
+### Step 3: 
+
+Open the open API library click on the elipsis & select add new api path then add the following code:
 
 ### backend-flask/openapi.yaml 
 
 ```
-      /api/activities/notification:
+    /api/activities/notification:
     get:
       description: 'Return a feed of activity for all those I followers'
       tags:
@@ -138,9 +156,10 @@ Step 3: Open the openAPI library click on the elipsis & select add new api path 
 ```
 
 
-### Step 4: To add an endpoint backend-flask/app.py
+### Step 4: 
+To add an endpoint backend-flask/app.py file
 
-Import from services.notifications_activities import *
+`Import from services.notifications_activities import *`
 
 also add this code in app.py file
 
@@ -151,8 +170,8 @@ def data_notification():
   return data, 200
 ```
 
-Step 4: 
-Now create a file in backend-flask: "notifications_activities.py" add the following code:
+### Step 4: 
+Create a file in backend-flask: "notifications_activities.py" add the following code:
 
 ```
 from datetime import datetime, timedelta, timezone
@@ -184,9 +203,10 @@ class NotificationActivities:
     return results
 ```
 
-## Task 4: Flask backend endpoint for notification  & React page for Notifications.
+## Task 4: Creating flask backend endpoint for notification & React page for Notifications.
 
-Step 1: goto the frontend-react-js directory/app.js
+### Step 1: 
+On the frontend-react-js directory/app.js file
 
 ```
 import './App.css';
@@ -257,12 +277,13 @@ export default App;
 
 ```
 
-Step 2: Now create two file under "pages" file name them : 
+### Step 2: 
+Create two file under "pages" file name them : 
 
 1.	NotificationsFeedPage.js 
 2.	NotificationsFeedPage.css
 
- Now write the following code in  NotificationsFeedPage.js file
+Now write the following code in  NotificationsFeedPage.js file
  
 ```
 import './NotificationFeedPage.css';
@@ -351,13 +372,15 @@ export default function HomeFeedPage() {
 }
 ```
 
-Step 3: Now commit all the changes of implementation on frontend-reacr-js for notification page.Here is the screenshot of the page.
+### Step 3: 
+Commit all the changes of implementation on frontend-react-js for notifications page.Here is the screenshot of the page.
  
 ![Notifiactionimage](weekly_images/Notificationpage.jpg)
 
-## Task 5: Run dynamoDB local Container & Run postgres Container.
+## Task 5: Adding DynamoDB local & Postgres
 
-Step 1: On the root directory open compose.yaml copy and paste this code:
+### Step 1: 
+On the root directory open compose.yaml copy and paste this code:
 
 ```
   dynamodb-local:
@@ -387,9 +410,10 @@ volumes:
   db:
     driver: local
 ```
-Step 2: Now compose up the "compose.yaml" then open the required ports: 5432 , 4567 , 8000
+### Step 2: 
+Compose up the "compose.yaml" then open the required ports: 5432 , 4567 , 8000
 
-### Create a table:
+### Creating a table in DynamoDB:
 ```
 aws dynamodb create-table \
     --endpoint-url http://localhost:8000 \
@@ -401,10 +425,10 @@ aws dynamodb create-table \
     --provisioned-throughput ReadCapacityUnits=1,WriteCapacityUnits=1 \
     --table-class STANDARD
 
+```
 ![tableimage](weekly_images/Createtable.jpg)
 
-```
-### Create an item:
+### Creating an item in DynamoDB:
 
 ```
 aws dynamodb put-item \
@@ -418,18 +442,22 @@ aws dynamodb put-item \
 
 ![Itemimage](weekly_images/Createitem.jpg)
 
-### List table:
-aws dynamodb list-tables --endpoint-url http://localhost:8000
+### Listing a table in DynamoDB:
+
+`aws dynamodb list-tables --endpoint-url http://localhost:8000`
 
 ![Listimage](weekly_images/Listtable.jpg)
 
-### Get records:
-aws dynamodb scan --table-name Music --query "Items" --endpoint-url http://localhost:8000
+### Getting records from DynamDB:
+
+`aws dynamodb scan --table-name Music --query "Items" --endpoint-url http://localhost:8000`
 
 ![Recordimage](weekly_images/Getrecords.jpg)
 
 
-Step 3: goto gitpod.yaml paste this code:
+### Step 3: 
+
+On the gitpod.yaml file paste the following code:
 
    ```
   - name: postgres
@@ -440,15 +468,21 @@ Step 3: goto gitpod.yaml paste this code:
       sudo apt install -y postgresql-client-13 libpq-dev
    ```
 
-Step 4: Run on the CLI terminal.
+### Step 4: 
+Run these commands on the CLI terminal for setting up Postgres db.
 
 ```
   curl -fsSL https://www.postgresql.org/media/keys/ACCC4CF8.asc|sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/postgresql.gpg
   echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" |sudo tee  /etc/apt/sources.list.d/pgdg.list
   sudo apt update
-  psql -Upostgres --host localhost
+ 
 ```
+### Step 5: 
+Run this command on the CLI terminal to connect with Postgres.
 
+ `psql -Upostgres --host localhost`
+
+Then run some of these commands for example: "\d","\dl","\l" to test the Postgres DB.
 
 
 
