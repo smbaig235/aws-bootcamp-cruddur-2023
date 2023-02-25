@@ -446,7 +446,7 @@ aws dynamodb put-item \
 
 `aws dynamodb list-tables --endpoint-url http://localhost:8000`
 
-![Listimage](week1_images/Listtable.jpg)
+![Listimage](week1_images/listtable.jpg)
 
 ### Getting records from DynamDB:
 
@@ -484,5 +484,5 @@ Run this command on the CLI terminal to connect with Postgres.
 
 Then run some of these commands for example: "\d","\dl","\l" to test the Postgres DB.
 
-
+![Postgresimage](week1_images/Postgresrun.jpg)
 
