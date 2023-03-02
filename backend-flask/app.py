@@ -32,13 +32,13 @@ import logging
 from time import strftime
 
 # Configuring Logger to Use CloudWatch
-#LOGGER = logging.getLogger(__name__)
-#LOGGER.setLevel(logging.DEBUG)
-#console_handler = logging.StreamHandler()
-#cw_handler = watchtower.CloudWatchLogHandler(log_group='cruddur')
-#LOGGER.addHandler(console_handler)
-#LOGGER.addHandler(cw_handler)
-#LOGGER.info("test log")
+LOGGER = logging.getLogger(__name__)
+LOGGER.setLevel(logging.DEBUG)
+console_handler = logging.StreamHandler()
+cw_handler = watchtower.CloudWatchLogHandler(log_group='cruddur')
+LOGGER.addHandler(console_handler)
+LOGGER.addHandler(cw_handler)
+LOGGER.info("test log")
 
 
 # X_Ray----
@@ -58,8 +58,8 @@ processor = BatchSpanProcessor(OTLPSpanExporter())
 provider.add_span_processor(processor)
 
 # X_Ray -----
-#xray_url = os.getenv("AWS_XRAY_URL")
-#xray_recorder.configure(service='Cruddur', dynamic_naming=xray_url)
+xray_url = os.getenv("AWS_XRAY_URL")
+xray_recorder.configure(service='Cruddur', dynamic_naming=xray_url)
 
 # show this in the logs with in the backend flask app (STDOUT)
 simple_processor = SimpleSpanProcessor(ConsoleSpanExporter())
@@ -71,7 +71,7 @@ tracer = trace.get_tracer(__name__)
 app = Flask(__name__)
 
 # X_Ray -----
-#XRayMiddleware(app, xray_recorder)
+XRayMiddleware(app, xray_recorder)
 
 # Honeycomb
 # Initialize automatic instrumentation with Flask
@@ -88,11 +88,11 @@ cors = CORS(
   methods="OPTIONS,GET,HEAD,POST"
 )
 # CloudWatch log
-#@app.after_request
-#def after_request(response):
-    #timestamp = strftime('[%Y-%b-%d %H:%M]')
-    #LOGGER.error('%s %s %s %s %s %s', timestamp, request.remote_addr, request.method, request.scheme, request.full_path, response.status)
-    #return response
+@app.after_request
+def after_request(response):
+    timestamp = strftime('[%Y-%b-%d %H:%M]')
+    LOGGER.error('%s %s %s %s %s %s', timestamp, request.remote_addr, request.method, request.scheme, request.full_path, response.status)
+    return response
 
     # Rollbar
 rollbar_access_token = os.getenv('ROLLBAR_ACCESS_TOKEN')
