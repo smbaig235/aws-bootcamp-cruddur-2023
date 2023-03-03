@@ -4,9 +4,9 @@ from aws_xray_sdk.core import xray_recorder
 
 class UserActivities:
   def run(user_handle):
-    try: 
+    #try: 
       # X-Ray---
-      segment = xray_recorder.begin_segment('user_activities_start')
+      #segment = xray_recorder.begin_segment('user_activities_start')
 
       model = {
         'errors': None,
@@ -29,18 +29,18 @@ class UserActivities:
         model['data'] = results
 
       # X-Ray---
-      subsegment = xray_recorder.begin_subsegment('mock-data')
+      #subsegment = xray_recorder.begin_subsegment('mock-data')
 
-      dict = {
+      #dict = {
 
-       "now": now.isoformat(),
-       "result-size": len(model['data'])
-      }
-      segment.put_metadata('key', dict, 'namespace')
-      subsegment.put_annotation('key', 'value')
-      xray_recorder.end_subsegment()
-    finally:
+       #"now": now.isoformat(),
+       #"result-size": len(model['data'])
+      #}
+      #segment.put_metadata('key', dict, 'namespace')
+      #subsegment.put_annotation('key', 'value')
+      #xray_recorder.end_subsegment()
+    #finally:
       # Close the segment
-      xray_recorder.end_segment()
+      #xray_recorder.end_segment()
 
       return model
