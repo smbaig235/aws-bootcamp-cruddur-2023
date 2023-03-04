@@ -1,6 +1,7 @@
 # Week 2 — Distributed Tracing
 ## Task 1: HoneyComb
-Honeycomb is a fast analysis tool that reveals how your code is experienced in complex and unpredictable environments. Troubleshoot complex relationships within your distributed services and solve problems faster.
+Honeycomb is a fast analysis tool that reveals how your code is experienced in complex and unpredictable environments. 
+
 ### Step 1: Export HoneyComb API key:
 `export HONEYCOMB_API_KEY="eTyV1LuefkWNs7PkN4FVCY"`
 `gp env HONEYCOMB_API_KEY="eTyV1LuefkWNs7PkN4FVCY"`
@@ -82,7 +83,7 @@ Now Commit and synchronize  then `compose up`
 Open backend page and send some data to honeycomb.io and observe the traces and run different queries to observe.
 ![HoneyCombimage](week2_images/HcTrace1.jpg)
 ![HoneyCombimage](week2_images/HcTraces.jpg)
-![HoneyCombimage](week2_images/QueriesSave.jpg)
+
 
 ##Custom Queries: 
 ### Query 1: 
@@ -98,6 +99,10 @@ VISUALIZE: AVG(duration_ms) GROUP BY: http.status_code ORDER BY: AVG(duration_ms
 VISUALIZE: COUNT_DISTINCT(http.server_name) GROUP BY: duration_ms ORDER BY: COUNT_DISTINCT(http.server_name) desc
 ```
 ![HoneyCombimage](week2_images/Query3.jpg)
+
+### Saved queries:
+
+![HoneyCombimage](week2_images/QueriesSave.jpg)
 
 ## Task 2: Instrument AWS X-Ray 
 AWS X-Ray is a service that collects data about requests that your application serves, and provides tools that you can use to view, filter, and gain insights into that data to identify issues.
@@ -214,7 +219,7 @@ def data_handle(handle):
   else:
     return model['data'], 200
 ```
-![X-Rayimage](week2_images/.jpg)
+
 ## Task 3:Configure CloudWatch logs
 The Amazon CloudWatch Logs service allows you to collect and store logs from your resources, applications, and services in near real time.
 
