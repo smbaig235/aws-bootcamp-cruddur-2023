@@ -31,7 +31,7 @@ pip install opentelemetry-api \
     opentelemetry-instrumentation-flask \
     opentelemetry-instrumentation-requests
 ```
-### Step 4: Now cd into backend-flask directory and install the above requirements on the terminal.
+### Step 4: Now cd into backend-flask directory and install the above requirements.
 `pip install -r requirements.txt`
 ### Step 5: Instrument HoneyComb
 ```
@@ -74,13 +74,14 @@ OTEL_EXPORTER_OTLP_HEADERS: "x-honeycomb-team=${HONEYCOMB_API_KEY}"
 OTEL_SERVICE_NAME: "${HONEYCOMB_SERVICE_NAME}"
 ```
 ### Step 7:  To add span and attributes open file in bakend-flask "home_activities.py" 
+
 `from opentelemetry import trace`
+
 `tracer = trace.get_tracer("home.activities")`
 ```
 class HomeActivities:
-  def run(logger):
-   logger.info("Home Activities")
-   with tracer.start_as_current_span("home-activies-mock-data"):
+  def run():
+    with tracer.start_as_current_span("home-activies-mock-data"):
     span = trace.get_current_span()
     now = datetime.now(timezone.utc).astimezone()
     span.set_attribute("app.now", now.isoformat())
@@ -150,7 +151,7 @@ XRayMiddleware(app, xray_recorder)
     }
   }
   ```
-### Step 5: To create group on AWS X-Ray.cd into backend-flask directory and run these commands.
+### Step 5: To create group on AWS X-Ray.Now change directory into backend-flask and run these commands.
 ```
 aws xray create-group \
    --group-name "Cruddur" \
