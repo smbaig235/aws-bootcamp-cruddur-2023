@@ -284,17 +284,21 @@ Now Commit all the changes & compose up the docker compose file.Then send some l
 ## Task 4: Integrate Rollbar with Cruddur app.
   Rollbar gives you a real-time feed of all errors .
 ### Step 1: open requirements.txt and add these requirements.
+
 `blinker`
+
 `rollbar`
 now run the requirements:  `pip install -r requirements.txt`
 
 ### Step 2: Open compose.yaml file set the access token.
+
 'ROLLBAR_ACCESS_TOKEN: "${ROLLBAR_ACCESS_TOKEN}"'
 
 ### Step 3: Now export the access token through CLI.
 
-`export ROLLBAR_ACCESS_TOKEN="de543e3610044146861616f5c204a151"`
-`gp env ROLLBAR_ACCESS_TOKEN="de543e3610044146861616f5c204a151"`
+`export ROLLBAR_ACCESS_TOKEN="access token"`
+
+`gp env ROLLBAR_ACCESS_TOKEN="access token"`
 
 ### Step 4: Add the following code in "app.py" file in nabkend-flask directory.
 ```
