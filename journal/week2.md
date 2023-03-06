@@ -3,11 +3,17 @@
 Honeycomb is a fast analysis tool that reveals how your code is experienced in complex and unpredictable environments. 
 
 ### Step 1: Export HoneyComb API key:
-`export HONEYCOMB_API_KEY="eTyV1LuefkWNs7PkN4FVCY"`
-`gp env HONEYCOMB_API_KEY="eTyV1LuefkWNs7PkN4FVCY"`
+
+`export HONEYCOMB_API_KEY="API Key"`
+
+`gp env HONEYCOMB_API_KEY="API KEY"`
+
 Also export HoneyComb service:
+
 `export HONEYCOMB_SERVICE_NAME="Cruddur"`
+
 `gp env HONEYCOMB_SERVICE_NAME="Cruddur"`
+
 ### Step 2:  Add these OTEL in docker compose-yaml file
 Honeycomb supports OpenTelemetry, the CNCF open standard for sending traces, metrics, and logs.
 ```
@@ -29,7 +35,7 @@ pip install opentelemetry-api \
 `pip install -r requirements.txt`
 ### Step 5: Instrument HoneyComb
 ```
-# Honeycomb
+
 from opentelemetry import trace
 from opentelemetry.instrumentation.flask import FlaskInstrumentor
 from opentelemetry.instrumentation.requests import RequestsInstrumentor
@@ -38,7 +44,7 @@ from opentelemetry.sdk.trace import TracerProvider
 from opentelemetry.sdk.trace.export import BatchSpanProcessor
 from opentelemetry.sdk.trace.export import ConsoleSpanExporter, SimpleSpanProcessor
 ```
-# Honeycomb
+
 ```
 # Initialize tracing and an exporter that can send data to Honeycomb
 provider = TracerProvider()
@@ -85,7 +91,7 @@ Open backend page and send some data to honeycomb.io and observe the traces and 
 ![HoneyCombimage](week2_images/HcTraces.jpg)
 
 
-##Custom Queries: 
+## Custom Queries: 
 ### Query 1: 
 ```
 VISUALIZE: AVG(duration_ms) GROUP BY: http.status_code ORDER BY: AVG(duration_ms)desc
