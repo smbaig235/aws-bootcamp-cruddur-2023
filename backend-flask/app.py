@@ -2,6 +2,7 @@ from flask import Flask
 from flask import request
 from flask_cors import CORS, cross_origin
 import os
+import sys 
 
 from services.home_activities import *
 from services.notification_activities import *
@@ -156,9 +157,13 @@ def data_create_message():
 @app.route("/api/activities/home", methods=['GET'])
 #@xray_recorder.capture('activities_home')
 def data_home():
+  app.logger.debug("AUTH HEADER")
+  app.logger.debug(
+    request.headers.get('Authorization')
+ )
   data = HomeActivities.run()
   return data, 200
-
+ 
 @app.route("/api/activities/notifications", methods=['GET'])
 def data_notification():
   data = NotificationActivities.run()
