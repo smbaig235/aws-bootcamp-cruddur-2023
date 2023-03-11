@@ -26,8 +26,8 @@ export default function HomeFeedPage() {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("access_token")}`
         },
-      
         method: "GET"
+
       });
 
       let resJson = await res.json();
