@@ -167,6 +167,7 @@ def data_home():
 
 access_token = extract_access_token(request.headers)
   try:
+  
     claims = cognito_jwt_token.verifyy(access_token)
 
     # Authenticated Request
@@ -178,11 +179,11 @@ access_token = extract_access_token(request.headers)
   except TokenVerifyError as e:
 
     # Unauthenticated Request
-
     app.logger.debug(e)
     app.logger.debug("unauthenicated")
 
     data = HomeActivities.run()
+  
   return data, 200
 
  
