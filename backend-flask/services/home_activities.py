@@ -54,7 +54,7 @@ class HomeActivities:
     ]
     if cognito_user_id != None:
         extra_crud = {
-          'uuid': '5d994778-f6b9-4339-beb1-26312a4f44d0',
+          'uuid': '248959df-3079-4947-b847-9e0892d1bab4',
           'handle':  'Success',
           'message': 'The Key to Sucess is to focus on goals,Not Obstacles',
           'created_at': (now - timedelta(hours=1)).isoformat(),
