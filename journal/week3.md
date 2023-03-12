@@ -23,8 +23,6 @@ Amplify.configure({
 ```
 ### Step 3: Set the environment variable in docker compose.yaml file
 ```
-REACT_APP_AWS_PROJECT_REGION:"${AWS_DEFAULT_REGION}"
-REACT_APP_AWS_COGNITO_REGION:${AWS_DEFAULT_REGION}
 REACT_APP_AWS_USER_POOLS_ID:"xxxx"
 REACT_APP_CLIENT_ID:"xxxx"
 ```
