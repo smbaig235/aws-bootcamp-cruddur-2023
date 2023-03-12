@@ -402,7 +402,6 @@ access_token = extract_access_token(request.headers)
   return data, 200
 ```
 ### Step 7: Go to the "profileinfo.js" add this code.
-
 ```
  const signOut = async () => {
     try {
