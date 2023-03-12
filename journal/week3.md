@@ -252,6 +252,7 @@ then compose up.
 ### Step 5: Create a folder under backend-flask/lib/cognito_jwt_token.py and add the following code.
 
 ```
+HTTP_HEADER = "Authorization"
 import time
 import requests
 from jose import jwk, jwt
@@ -376,7 +377,7 @@ class CognitoJwtToken:
 cognito_jwt_token = CognitoJwtToken(
 user_pool_id=os.getenv("AWS_COGNITO_USER_POOL_ID"),
 user_pool_client_id=os.getenv("AWS_COGNITO_USER_POOL_CLIENT_ID"),
-region=os.getenv("AWS_DEFAULT_REGION"):
+region=os.getenv("AWS_DEFAULT_REGION")
 )
 ```
 
@@ -433,3 +434,5 @@ access_token = extract_access_token(request.headers)
         results.insert(0,extra_crud)
 ```
 Now commit the code and compose up and test the login to verify JWT token.
+
+![JWTverifyimage](week3_images/JWTtoken.jpg)
