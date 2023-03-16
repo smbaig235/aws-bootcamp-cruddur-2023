@@ -4,17 +4,17 @@ import logging
 
 from lib.db import pool
 
-tracer = trace.get_tracer("home.activities")
+#tracer = trace.get_tracer("home.activities")
 
 class HomeActivities:
   
   def run(cognito_user_id=None):
 
    #logger.info("Home Activities")
-   with tracer.start_as_current_span("home-activies-mock-data"):
-    span = trace.get_current_span()
-    now = datetime.now(timezone.utc).astimezone()
-    span.set_attribute("app.now", now.isoformat())
+   #with tracer.start_as_current_span("home-activies-mock-data"):
+    #span = trace.get_current_span()
+    #now = datetime.now(timezone.utc).astimezone()
+    #span.set_attribute("app.now", now.isoformat())
 
     sql = query_wrap_array("""
          SELECT
