@@ -1,4 +1,4 @@
-from psycopg_pool import ConnectionPool, query_wrap_array
+from psycopg_pool import ConnectionPool
 import os
 
 def query_wrap_object(template):
