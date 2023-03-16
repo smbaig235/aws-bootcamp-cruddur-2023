@@ -7,7 +7,7 @@ def query_wrap_object(template):
   {template}
   ) object_row);
   """
-return sql
+  return sql
 
 def query_wrap_array(template):
   sql = f"""
