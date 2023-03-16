@@ -17,7 +17,7 @@ class HomeActivities:
     #span.set_attribute("app.now", now.isoformat())
 
     sql = query_wrap_array("""
-         SELECT
+      SELECT
         activities.uuid,
         users.display_name,
         users.handle,
@@ -32,19 +32,13 @@ class HomeActivities:
       LEFT JOIN public.users ON users.uuid = activities.user_uuid
       ORDER BY activities.created_at DESC
       """)
-
-  print("SQL--------")
-      
-  with pool.connection() as conn:
+    print(sql)
+    with pool.connection() as conn:
         with conn.cursor() as cur:
           cur.execute(sql)
           # this will return a tuple
           # the first field being the data
           json = cur.fetchone()
-          print("--------")
-      
-          print(json[0])
-          return json[0]
-        return results
+    return json[0]
 
  
