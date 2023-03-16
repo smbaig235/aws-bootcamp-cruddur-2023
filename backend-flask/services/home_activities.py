@@ -33,7 +33,7 @@ class HomeActivities:
       ORDER BY activities.created_at DESC
       """)
 
-   print("SQL--------")
+  print("SQL--------")
       
   with pool.connection() as conn:
         with conn.cursor() as cur:
