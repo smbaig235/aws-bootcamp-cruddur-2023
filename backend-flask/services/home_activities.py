@@ -36,7 +36,7 @@ class HomeActivities:
         """)
   print(sql)
   with pool.connection() as conn:
-    with conn.cursor() as cur:
+      with conn.cursor() as cur:
             cur.execute(sql)
             # this will return a tuple
             # the first field being the data
