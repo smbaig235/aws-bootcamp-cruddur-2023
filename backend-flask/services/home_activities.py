@@ -43,8 +43,8 @@ class HomeActivities:
           # the first field being the data
           json = cur.fetchone()
           print(json[0])
-   return json[0]
-   return results
+  return json[0]
+  return results
 
 
 
