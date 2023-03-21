@@ -44,7 +44,7 @@ class HomeActivities:
           json = cur.fetchone()
           print(json[0])
    return json[0]
-return results
+
 
 
   
