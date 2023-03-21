@@ -8,7 +8,7 @@ from lib.db import pool, query_wrap_object, query_wrap_array
 
 class HomeActivities:
   
-  def run(logger,cognito_user_id=None):
+  def run(cognito_user_id=None):
 
     logger.info("Home Activities")
    #with tracer.start_as_current_span("home-activies-mock-data"):
@@ -44,6 +44,7 @@ class HomeActivities:
           json = cur.fetchone()
           print(json[0])
    return json[0]
+   return results
 
 
 
