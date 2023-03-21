@@ -4,7 +4,7 @@ import logging
 
 from lib.db import pool, query_wrap_object, query_wrap_array
 
-tracer = trace.get_tracer("home.activities")
+#tracer = trace.get_tracer("home.activities")
 
 class HomeActivities:
   
