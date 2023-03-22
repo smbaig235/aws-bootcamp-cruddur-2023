@@ -24,7 +24,7 @@ class Db:
     return template_content
 
   def init_pool(self):
-    connection_url = os.getenv("CONNECTION_URL")
+    connection_url = os.getenv("postgresql://postgres:password@127.0.0.1:5432/cruddur")
     self.pool = ConnectionPool(connection_url)
   # we want to commit data such as an insert
   # be sure to check for RETURNING in all uppercases
