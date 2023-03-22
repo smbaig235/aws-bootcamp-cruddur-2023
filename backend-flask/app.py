@@ -95,11 +95,11 @@ cors = CORS(
   methods="OPTIONS,GET,HEAD,POST"
 )
    #CloudWatch log
-@app.after_request
-def after_request(response):
-    timestamp = strftime('[%Y-%b-%d %H:%M]')
-    LOGGER.error('%s %s %s %s %s %s', timestamp, request.remote_addr, request.method, request.scheme, request.full_path, response.status)
-    return response
+#@app.after_request
+#def after_request(response):
+    #timestamp = strftime('[%Y-%b-%d %H:%M]')
+    #LOGGER.error('%s %s %s %s %s %s', timestamp, request.remote_addr, request.method, request.scheme, request.full_path, response.status)
+    #return response
 
     # Rollbar
 rollbar_access_token = os.getenv('ROLLBAR_ACCESS_TOKEN')
@@ -163,7 +163,7 @@ def data_create_message():
 @app.route("/api/activities/home", methods=['GET'])
 #@xray_recorder.capture('activities_home')
 def data_home():
-  data = HomeActivities.run(logger=LOGGER)
+  data = HomeActivities.run()
   
   access_token = extract_access_token(request.headers)
   try:
