@@ -75,7 +75,7 @@ const checkAuth = async () => {
       <DesktopNavigation user={user} active={'home'} setPopped={setPopped} />
       <div className='content'>
         <ActivityForm  
-          user_handle={user}
+          //user_handle={user}
           popped={popped}
           setPopped={setPopped} 
           setActivities={setActivities} 
