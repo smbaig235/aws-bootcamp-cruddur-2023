@@ -8,11 +8,11 @@ class Db:
   def __init__(self):
     self.init_pool()
 
-  def template(self,args):
+  def template(self,*args):
     pathing = list((app.root_path,'db','sql',) + args)
     pathing[-1] = pathing[-1] + ".sql"
 
-    template_path = os.path.join(pathing)
+    template_path = os.path.join(*pathing)
 
     green = '\033[92m'
     no_color = '\033[0m'
