@@ -58,7 +58,9 @@ CREATE TABLE public.activities (
 ```
 ### Step 3: Run this command on the terminal.
 ` psql cruddur < db/schema.sql -h localhost -U postgres `
-![Dbimage](week4_images/SchemaSql.jpg)
+
+![image](week4_images/SchemaSql.jpg)
+
 ### Step 4: Set environment variable for the connection URL.
 
 ` export CONNECTION_URL="postgresql://postgres:xxxxx@127.0.0.1:5432/cruddur" `
@@ -72,7 +74,9 @@ To make sure the env var is set:
 `export PROD_CONNECTION_URL="postgresql://cruddurroot:xxxxxx@database endpoint:5432/cruddur"`
 
 `gp env PROD_CONNECTION_URL="postgresql://cruddurroot:xxxxxx@database endpoint:5432/cruddur"`
+
 To make sure the env var is set run:
+
 `env | grep PROD_CONNECTION_URL`
 
 ### Step 6: Create a bash file under directory "backend-flask/bin/db-drop" to drop the database.
@@ -94,6 +98,7 @@ Run:  ` chmod +x bin/db-drop`
 Run:   `ls -l ./bin`
 Run:   `./bin/db-drop`
 Result:  DROP DATABASE
+
 ### Step 7: Create a bash file under directory " backend-flask/bin/db-create" to create databse.
 ```
 #! /usr/bin/bash
@@ -110,6 +115,7 @@ Run:  ` chmod +x bin/db-drop`
 Run:   `ls -l ./bin`
 Run:   `./bin/db-create`
 Result:  CREATE DATABASE
+
 ### Step 8: Create a bash file under directory "backend-flask/bin/db-schema-load" to load the schema.
 ```
 #! /usr/bin/bash
@@ -138,7 +144,7 @@ Result:  Running production
 
 ![Dbimage](week4_images/Schemaload.jpg)
 
-### Step 8: Create a SQL Query file under directory "backend-flask/db/schema.sql"
+### Step 9: Create a SQL Query file under directory "backend-flask/db/schema.sql"
 ```
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 DROP TABLE IF EXISTS public.users;
@@ -163,9 +169,9 @@ CREATE TABLE public.activities (
   created_at TIMESTAMP default current_timestamp NOT NULL
 );
 ```
-![Dbimage](week4_images/UserActivities.jpg)
+![image](week4_images/UserActivities.jpg)
 
-### Step 9: Create a bash file under directory "backend-flask/bin/db-connect" 
+### Step 10: Create a bash file under directory "backend-flask/bin/db-connect" 
 ```
 #! /usr/bin/bash
 if [ "$1" = "prod" ]; then
@@ -183,9 +189,9 @@ Run:   `chmod u+x bin/db-connect`
 Run:   `./bin/db-connect`
 Result: you will be able connect to the database "cruddur" run,  " \l , \dt " so,you can see users and activities table in the database.
 
-![Dbimage](week4_images/Production.jpg)
+![image](week4_images/Production.jpg)
 
-### Step 10: Create a bash file under directory "backend-flask/bin/db-seed" 
+### Step 11: Create a bash file under directory "backend-flask/bin/db-seed" 
 ```
 #! /usr/bin/bash
 CYAN='\033[1;36m'
@@ -196,18 +202,20 @@ seed_path="$(realpath .)/db/seed.sql"
 echo $seed_path
 psql $CONNECTION_URL cruddur < $seed_path
 ```
-![Dbimage](week4_images/seed.jpg)
+![image](week4_images/seed.jpg)
 
-### Step 11: Create a SQL Query file under directory "backend-flask/db/seed.sql"
+### Step 12: Create a SQL Query file under directory "backend-flask/db/seed.sql"
 ```
-INSERT INTO public.users (display_name, handle, cognito_user_id)
+INSERT INTO public.users (display_name, email, handle, cognito_user_id)
 VALUES
-  ('Andrew Brown', 'andrewbrown' ,'MOCK'),
-  ('Andrew Bayko', 'bayko' ,'MOCK');
+  ('sadaf','smbaig251@gmail.com', 'sadaf_23','117eb7d2-d93b-484b-8af0-62f69ff106f5'),
+  ('Andrew Bayko','bayko@exampro.co', 'bayko','MOCK'),
+  ('Londo Mollari','lmollari@centari.com','londo','MOCK');
+
 INSERT INTO public.activities (user_uuid, message, expires_at)
 VALUES
   (
-    (SELECT uuid from public.users WHERE users.handle = 'andrewbrown' LIMIT 1),
+    (SELECT uuid from public.users WHERE users.handle = 'sadaf_23' LIMIT 1),
     'This was imported as seed data!',
     current_timestamp + interval '10 day'
   )
@@ -219,14 +227,14 @@ Run:  `./bin/db-seed`
 
 Results: INSERT 0 2,INSERT 0 1
 
-### Step 12: Connect with the database.
+### Step 13: Connect with the database.
 
 RUN: `./bin/db-connect`
 
 cruddur#: \dt  to see tables
 
 cruddur#: `SELECT * FROM activities;`
-### Step 13: Create a bash file under directory "backend-flask/bin/db-sessions"
+### Step 14: Create a bash file under directory "backend-flask/bin/db-sessions"
 ```
 #! /usr/bin/bash
 CYAN='\033[1;36m'
@@ -254,7 +262,7 @@ RUN:  `chmod u+x ./bin/db-sessions`
 
 Run: `./bin/db-sessions`
 
-![Dbimage](week4_images/Session.jpg)
+![image](week4_images/Session.jpg)
 
 ### Step 14: Create a bash file under directory "backend-flask/bin/db-setup"
 ```
@@ -307,12 +315,12 @@ def query_wrap_array(template):
   ) array_row);
   """
    return sql
-connection_url = os.getenv("postgresql://postgres:xxxxx@127.0.0.1:5432/cruddur")
+connection_url = os.getenv("postgresql://postgres:xxxxx@db:5432/cruddur")
 pool = ConnectionPool(connection_url)
 ```
 ### Step 3: Now set the Connection URL environment variable in docker compose file
 
- `CONNECTION_URL: "postgresql://postgres:xxxxxx@127.0.0.1:5432/cruddur"`
+ `CONNECTION_URL: "postgresql://postgres:xxxxxx@db:5432/cruddur"`
 
 ### Step 4: Open backend-flask/services/homeactivities and add the following code.
 ```
@@ -427,7 +435,7 @@ def lambda_handler(event, context):
 return event
 ```
 
-![Dbimage](week4_images/lambdafn.jpg)
+![image](week4_images/lambdafn.jpg)
 
 ### Step 3: Go to the lambda function and deploy the above code and the set permissions for the lambda apply custom policy as well,set VPC,set environement variable for lambda and add layer.
 for attaching custom policy write the following JSON:
@@ -450,13 +458,15 @@ for attaching custom policy write the following JSON:
     ]
 }
 ```
-![Dbimage](week4_images/Policy.jpg)
+![image](week4_images/Policy.jpg)
 
 for adding psycopg2 security layer to the lambda:
 
 `arn:aws:lambda:us-east-1:898466741470:layer:psycopg2-py38:2`
 
 ## Task 7: Create new activities with a database insert.
+
+
 ### Step 1: Add the following code into backend-flask/services/create_activity. 
 ```
 from lib.db import db
@@ -481,14 +491,17 @@ import os
 import re
 import sys
 from flask import current_app as app
+
 class Db:
   def __init__(self):
     self.init_pool()
 
-  def template(self,args):
+  def template(self,*args):
     pathing = list((app.root_path,'db','sql',) + args)
     pathing[-1] = pathing[-1] + ".sql"
-    template_path = os.path.join(pathing)
+
+    template_path = os.path.join(*pathing)
+
     green = '\033[92m'
     no_color = '\033[0m'
     print("\n")
@@ -499,7 +512,7 @@ class Db:
     return template_content
 
   def init_pool(self):
-    connection_url = os.getenv("postgresql://postgres:xxxxxx@127.0.0.1:5432/cruddur")
+    connection_url = os.getenv("CONNECTION_URL")
     self.pool = ConnectionPool(connection_url)
   # we want to commit data such as an insert
   # be sure to check for RETURNING in all uppercases
@@ -577,15 +590,18 @@ class Db:
 
     # get the line number when exception occured
     line_num = traceback.tb_lineno
+
     # print the connect() error
     print ("\npsycopg ERROR:", err, "on line number:", line_num)
     print ("psycopg traceback:", traceback, "-- type:", err_type)
+
     # print the pgcode and pgerror exceptions
     print ("pgerror:", err.pgerror)
     print ("pgcode:", err.pgcode, "\n")
+
 db = Db()
 ```
-### Step 3: Create a folder under directory "backend-flask/db/sql/activities" create a file "create_activity.sql" add the following code.
+### Step 3: Create a folder under directory "backend-flask/db/sql/activities" create a file "create.sql" add the following code.
 ```
 INSERT INTO public.activities (
   user_uuid,
@@ -633,3 +649,21 @@ FROM public.activities
 LEFT JOIN public.users ON users.uuid = activities.user_uuid
 ORDER BY activities.created_at DESC
 ```
+### Step 6: open file under directory "backend-flask/app.y" provide the user handle.
+
+```
+@app.route("/api/activities", methods=['POST','OPTIONS'])
+@cross_origin()
+def data_activities():
+  user_handle = 'sadaf_23'
+  message = request.json['message']
+  ttl = request.json['ttl']
+  model = CreateActivity.run(message, user_handle, ttl)
+  if model['errors'] is not None:
+    return model['errors'], 422
+  else:
+    return model['data'], 200
+  return
+
+  ```
+  ![image](week4_images/Crudpost.jpg)
