@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python3.8
 
 import boto3
 import os
@@ -232,7 +232,7 @@ for i in range(len(lines)):
 
   created_at = (now + timedelta(minutes=i)).isoformat()
   create_message(
-    client=ddb,
+    client=db,
     message_group_uuid=message_group_uuid,
     created_at=created_at,
     message=message,
