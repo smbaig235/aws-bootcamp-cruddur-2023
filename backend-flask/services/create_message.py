@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta, timezone
 
 from lib.db import db
-from lib.ddb import ddb
+from lib.ddb import Ddb
 
 class CreateMessage:
   # mode indicates if we want to create a new message_group or using an existing one
@@ -57,10 +57,10 @@ class CreateMessage:
       print("USERS=[other-user]==")
       print(other_user)
 
-      ddb = ddb.client()
+      ddb = Ddb.client()
 
       if (mode == "update"):
-        data = ddb.create_message(
+        data = Ddb.create_message(
           client=ddb,
           message_group_uuid=message_group_uuid,
           message=message,
@@ -69,7 +69,7 @@ class CreateMessage:
           my_user_handle=my_user['handle']
         )
       elif (mode == "create"):
-        data = ddb.create_message_group(
+        data = Ddb.create_message_group(
           client=ddb,
           message=message,
           my_user_uuid=my_user['uuid'],
