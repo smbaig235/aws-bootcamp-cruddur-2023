@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta, timezone
 
-from lib.ddb import Ddb
+from lib.Ddb import Ddb
 from lib.db import db
 
 class MessageGroups:
