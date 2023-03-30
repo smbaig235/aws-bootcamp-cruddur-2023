@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.8
+#!/usr/bin/env python3
 
 import boto3
 import os
@@ -18,7 +18,7 @@ attrs = {
 if len(sys.argv) == 2:
   if "prod" in sys.argv[1]:
     attrs = {}
-db = boto3.client('dynamodb',**attrs)
+ddb = boto3.client('dynamodb',**attrs)
 
 def get_user_uuids():
   sql = """
@@ -35,10 +35,10 @@ def get_user_uuids():
   """
   users = db.query_array_json(sql,{
     'my_handle':  'sadaf_23',
-    'other_handle': 'sarah123'
+    'other_handle': 'bayko'
   })
   my_user    = next((item for item in users if item["handle"] == 'sadaf_23'), None)
-  other_user = next((item for item in users if item["handle"] == 'sarah123'), None)
+  other_user = next((item for item in users if item["handle"] == 'bayko'), None)
   results = {
     'my_user': my_user,
     'other_user': other_user
@@ -89,7 +89,7 @@ now = datetime.now(timezone.utc).astimezone()
 users = get_user_uuids()
 
 create_message_group(
-  client=db,
+  client=ddb,
   message_group_uuid=message_group_uuid,
   my_user_uuid=users['my_user']['uuid'],
   other_user_uuid=users['other_user']['uuid'],
@@ -100,7 +100,7 @@ create_message_group(
 )
 
 create_message_group(
-  client=db,
+  client=ddb,
   message_group_uuid=message_group_uuid,
   my_user_uuid=users['other_user']['uuid'],
   other_user_uuid=users['my_user']['uuid'],
@@ -232,7 +232,7 @@ for i in range(len(lines)):
 
   created_at = (now + timedelta(minutes=i)).isoformat()
   create_message(
-    client=db,
+    client=ddb,
     message_group_uuid=message_group_uuid,
     created_at=created_at,
     message=message,
