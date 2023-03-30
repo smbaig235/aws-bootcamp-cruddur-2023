@@ -143,7 +143,7 @@ def data_message_groups():
     # unauthenicatied request
     app.logger.debug(e)
     return {}, 401
-    
+
 @app.route("/api/messages/@<string:handle>", methods=['GET'])
 def data_messages(handle):
   user_sender_handle = 'andrewbrown'
