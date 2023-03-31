@@ -1,15 +1,12 @@
 import './HomeFeedPage.css';
 import React from "react";
 
-import checkAuth from '../lib/CheckAuth';
 import DesktopNavigation  from '../components/DesktopNavigation';
 import DesktopSidebar     from '../components/DesktopSidebar';
 import ActivityFeed from '../components/ActivityFeed';
 import ActivityForm from '../components/ActivityForm';
 import ReplyForm from '../components/ReplyForm';
-
-// [TODO] Authenication
-//import { Auth } from 'aws-amplify';
+import checkAuth from '../lib/CheckAuth';
 
 export default function HomeFeedPage() {
   const [activities, setActivities] = React.useState([]);
@@ -27,9 +24,7 @@ export default function HomeFeedPage() {
           Authorization: `Bearer ${localStorage.getItem("access_token")}`
         },
         method: "GET"
-
       });
-
       let resJson = await res.json();
       if (res.status === 200) {
         setActivities(resJson)
@@ -41,26 +36,8 @@ export default function HomeFeedPage() {
     }
   };
 
-  // check if we are authenicated
-const checkAuth = async () => {
-  Auth.currentAuthenticatedUser({
-    // Optional, By default is false. 
-    // If set to true, this call will send a 
-    // request to Cognito to get the latest user data
-    bypassCache: false 
-  })
-  .then((user) => {
-    console.log('user',user);
-    return Auth.currentAuthenticatedUser()
-  }).then((cognito_user) => {
-      setUser({
-        display_name: cognito_user.attributes.name,
-        handle: cognito_user.attributes.preferred_username
-      })
-  })
-  .catch((err) => console.log(err));
-  };
 
+  
   React.useEffect(()=>{
     //prevents double call
     if (dataFetchedRef.current) return;
@@ -75,7 +52,6 @@ const checkAuth = async () => {
       <DesktopNavigation user={user} active={'home'} setPopped={setPopped} />
       <div className='content'>
         <ActivityForm  
-          //user_handle={user}
           popped={popped}
           setPopped={setPopped} 
           setActivities={setActivities} 
