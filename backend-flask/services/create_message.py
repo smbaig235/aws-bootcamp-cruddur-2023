@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta, timezone
 
 from lib.db import db
-from lib.ddb import Ddb
+from lib.Ddb import Ddb
 
 class CreateMessage:
   # mode indicates if we want to create a new message_group or using an existing one
