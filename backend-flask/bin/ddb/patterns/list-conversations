@@ -17,7 +17,7 @@ else:
     params = {'endpoint_url': 'http://localhost:8000'}
 
 
-dynamodb = boto3.client('dynamodb',**attrs)
+dynamodb = boto3.client('dynamodb',**params)
 table_name = 'cruddur-messages'
 
 def get_my_user_uuid():
