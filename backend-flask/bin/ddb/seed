@@ -18,7 +18,7 @@ attrs = {
 if len(sys.argv) == 2:
   if "prod" in sys.argv[1]:
     attrs = {}
-ddb = boto3.client('dynamodb',**attrs)
+dynamodb = boto3.client('dynamodb',**attrs)
 
 def get_user_uuids():
   sql = """
@@ -89,7 +89,7 @@ now = datetime.now(timezone.utc).astimezone()
 users = get_user_uuids()
 
 create_message_group(
-  client=ddb,
+  client=dynamodb,
   message_group_uuid=message_group_uuid,
   my_user_uuid=users['my_user']['uuid'],
   other_user_uuid=users['other_user']['uuid'],
@@ -100,7 +100,7 @@ create_message_group(
 )
 
 create_message_group(
-  client=ddb,
+  client=dynamodb,
   message_group_uuid=message_group_uuid,
   my_user_uuid=users['other_user']['uuid'],
   other_user_uuid=users['my_user']['uuid'],
@@ -232,7 +232,7 @@ for i in range(len(lines)):
 
   created_at = (now + timedelta(minutes=i)).isoformat()
   create_message(
-    client=ddb,
+    client=dynamodb,
     message_group_uuid=message_group_uuid,
     created_at=created_at,
     message=message,
