@@ -10,13 +10,12 @@ parent_path = os.path.abspath(os.path.join(current_path, '..', '..', '..'))
 sys.path.append(parent_path)
 from lib.db import db
 
-attrs = {
-  'endpoint_url': 'http://localhost:8000'
-}
+params = {}
+if len(sys.argv) == 2 and "prod" in sys.argv[1]:
+    params = {}
+else:
+    params = {'endpoint_url': 'http://localhost:8000'}
 
-if len(sys.argv) == 2:
-  if "prod" in sys.argv[1]:
-    attrs = {}
 
 dynamodb = boto3.client('dynamodb',**attrs)
 table_name = 'cruddur-messages'
