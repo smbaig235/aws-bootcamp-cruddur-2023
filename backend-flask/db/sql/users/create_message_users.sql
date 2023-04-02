@@ -1,4 +1,4 @@
-SELECT 
+SSELECT 
   users.uuid,
   users.display_name,
   users.handle,
