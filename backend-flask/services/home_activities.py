@@ -15,7 +15,7 @@ class HomeActivities:
     #  span.set_attribute("app.now", now.isoformat())
 
 
-    sql = db.template('activities','home')
+    sql = db.read_sql_template('activities','home')
     results = db.query_array_json(sql)
     return results
 
