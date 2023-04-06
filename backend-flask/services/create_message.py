@@ -36,7 +36,7 @@ class CreateMessage:
         'message': message
       }
     else:
-      sql = db.read_sql_template('users','create_message_users')
+      sql = db.template('users','create_message_users')
 
       if user_receiver_handle == None:
         rev_handle = ''
