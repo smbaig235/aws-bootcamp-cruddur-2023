@@ -11,7 +11,7 @@ else:
 
 
 dynamodb = boto3.client('dynamodb', **params)
-table_name = "cruddr-messages"
+table_name = "cruddur-messages"
 
 response = dynamodb.create_table(
     AttributeDefinitions=[
