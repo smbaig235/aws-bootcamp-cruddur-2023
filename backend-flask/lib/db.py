@@ -82,8 +82,8 @@ class Db:
           "{}"
         else:
           return json[0]
-  def query_value(self,sql, log=False, **params):
-    self.print_sql('value',sql,log)
+  def query_value(self,sql,params={}):
+    self.print_sql('value',sql,params)
     with self.pool.connection() as conn:
       with conn.cursor() as cur:
         cur.execute(sql,params)
