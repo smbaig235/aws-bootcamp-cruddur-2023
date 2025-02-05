@@ -36,11 +36,11 @@ import watchtower
 import logging
 
 # Rollbar ------
-from time import strftime
-import os
-import rollbar
-import rollbar.contrib.flask
-from flask import got_request_exception
+##from time import strftime
+#import os
+#import rollbar
+#import rollbar.contrib.flask
+#from flask import got_request_exception
 
 # Configuring Logger to Use CloudWatch
 # LOGGER = logging.getLogger(__name__)
@@ -53,9 +53,9 @@ from flask import got_request_exception
 
 # HoneyComb ---------
 # Initialize tracing and an exporter that can send data to Honeycomb
-provider = TracerProvider()
-processor = BatchSpanProcessor(OTLPSpanExporter())
-provider.add_span_processor(processor)
+#provider = TracerProvider()
+#processor = BatchSpanProcessor(OTLPSpanExporter())
+#provider.add_span_processor(processor)
 
 # X-RAY ----------
 #xray_url = osgetenv("AWS_XRAY_URL")
@@ -66,8 +66,8 @@ provider.add_span_processor(processor)
 #simple_processor = SimpleSpanProcessor(ConsoleSpanExporter())
 #provider.add_span_processor(simple_processor)
 
-trace.set_tracer_provider(provider)
-tracer = trace.get_tracer(__name__)
+#trace.set_tracer_provider(provider)
+#tracer = trace.get_tracer(__name__)
 
 app = Flask(__name__)
 
@@ -82,19 +82,19 @@ cognito_jwt_token = CognitoJwtToken(
 
 # HoneyComb ---------
 # Initialize automatic instrumentation with Flask
-FlaskInstrumentor().instrument_app(app)
-RequestsInstrumentor().instrument()
+#FlaskInstrumentor().instrument_app(app)
+#RequestsInstrumentor().instrument()
 
 
-frontend = os.getenv('FRONTEND_URL')
-backend = os.getenv('BACKEND_URL')
-origins = [frontend, backend]
-cors = CORS(
-  app, 
-  resources={r"/api/*": {"origins": origins}},
-  headers=['Content-Type', 'Authorization'], 
-  expose_headers='Authorization',
-  methods="OPTIONS,GET,HEAD,POST"
+#frontend = os.getenv('FRONTEND_URL')
+#backend = os.getenv('BACKEND_URL')
+#origins = [frontend, backend]
+#cors = CORS(
+  #app, 
+  #resources={r"/api/*": {"origins": origins}},
+  #headers=['Content-Type', 'Authorization'], 
+  #expose_headers='Authorization',
+  #methods="OPTIONS,GET,HEAD,POST"
 )
 
 # CloudWatch Logs -----
@@ -105,6 +105,9 @@ cors = CORS(
 #    return response
 
 # Rollbar ----------
+
+'''
+
 rollbar_access_token = os.getenv('ROLLBAR_ACCESS_TOKEN')
 @app.before_first_request
 def init_rollbar():
@@ -297,3 +300,5 @@ def data_users_short(handle):
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+    '''
